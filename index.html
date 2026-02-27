@@ -19,11 +19,83 @@
             color: white;
             overflow-x: hidden;
         }
+        
+        /* Animações */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Classes de animação */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .animate-left.visible {
+            animation: fadeInLeft 1s ease forwards;
+        }
+
+        .animate-right.visible {
+            animation: fadeInRight 1s ease forwards;
+        }
+
+        .animate-scale.visible {
+            animation: scaleIn 1s ease forwards;
+        }
+
+        /* Partículas de fundo */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #22c55e;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
+            filter: blur(2px);
+            animation: floatParticle 10s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+        }
+
         .logo-font {
             font-weight: 800;
             letter-spacing: -0.07em;
             font-size: 1.8rem;
         }
+        
         .mesh-gradient {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -31,18 +103,20 @@
                         radial-gradient(circle at 0% 100%, rgba(34, 197, 94, 0.05) 0%, transparent 40%);
             z-index: -1;
         }
+        
         .glass-card {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(34, 197, 94, 0.2); 
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
         .glass-card:hover {
             border-color: var(--brand-green);
             transform: translateY(-8px);
             box-shadow: 0 0 30px rgba(34, 197, 94, 0.1);
         }
-        /* Ajustes mobile */
+        
         @media (max-width: 768px) {
             .glass-card {
                 backdrop-filter: blur(8px);
@@ -52,18 +126,21 @@
                 border-color: var(--brand-green);
             }
         }
+        
         .text-gradient {
             background: linear-gradient(135deg, #fff 0%, #22c55e 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        
         .btn-premium {
             background: #22c55e; 
             color: black;
             font-weight: 800;
             box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.4);
         }
-        .btn-glass {
+        
+        .btn-glass, .btn-qualificar-flutuante {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -71,16 +148,74 @@
             font-weight: 800;
             transition: all 0.3s ease;
         }
-        .btn-glass:hover {
+        
+        .btn-glass:hover, .btn-qualificar-flutuante:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: var(--brand-green);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
         }
+
+        /* Botão flutuante */
+        .btn-qualificar-flutuante {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-qualificar-flutuante::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #22c55e, transparent, #22c55e);
+            border-radius: 3rem;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-qualificar-flutuante:hover::before {
+            opacity: 0.5;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .btn-qualificar-flutuante {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.7rem;
+            }
+        }
+        
         .video-overlay {
             background: radial-gradient(circle at center, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
         }
+        
         #form-qualificar { display: none; }
         
-        /* Scroll horizontal estiloso */
+        /* Scroll animado */
         .scroll-container {
             -webkit-overflow-scrolling: touch;
             scroll-snap-type: x mandatory;
@@ -91,40 +226,175 @@
             scrollbar-color: #22c55e #1a1a1a;
             cursor: grab;
             transition: all 0.3s ease;
+            position: relative;
+            perspective: 1000px;
         }
-        .scroll-container:active {
-            cursor: grabbing;
+        
+        .scroll-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(34, 197, 94, 0.2) 50%, 
+                transparent 100%);
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0;
+            animation: scanner 4s ease-in-out infinite;
         }
-        .scroll-container::-webkit-scrollbar {
-            height: 4px;
+
+        @keyframes scanner {
+            0%, 100% { opacity: 0; transform: translateX(-100%); }
+            50% { opacity: 0.5; transform: translateX(100%); }
         }
+
+        .scroll-container:active { cursor: grabbing; }
+        
+        .scroll-container::-webkit-scrollbar { height: 6px; }
         .scroll-container::-webkit-scrollbar-track {
             background: #1a1a1a;
             border-radius: 20px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
         }
         .scroll-container::-webkit-scrollbar-thumb {
-            background: #22c55e;
+            background: linear-gradient(90deg, #22c55e, #4ade80, #22c55e);
             border-radius: 20px;
-            box-shadow: 0 0 15px #22c55e;
+            box-shadow: 0 0 20px #22c55e, 0 0 40px #22c55e;
+            animation: glowPulse 2s ease-in-out infinite;
         }
+        
         .scroll-item {
             scroll-snap-align: start;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-            opacity: 0.85;
-            filter: brightness(0.9);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0.7;
+            filter: brightness(0.8) blur(1px);
+            transform: rotateY(10deg) scale(0.95);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
+
+        .scroll-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .scroll-item:hover::after { left: 150%; }
+
+        .scroll-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, 
+                rgba(34, 197, 94, 0.3) 0%, 
+                transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .scroll-item.active {
+            opacity: 1;
+            filter: brightness(1.2) blur(0);
+            transform: rotateY(0deg) scale(1.05);
+            box-shadow: 0 30px 60px rgba(34, 197, 94, 0.3),
+                        0 0 0 2px rgba(34, 197, 94, 0.5) inset;
+        }
+
+        .scroll-item.active::before {
+            opacity: 1;
+            animation: particlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes particlePulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(5deg); opacity: 0.6; }
+        }
+
         .scroll-item:hover {
             opacity: 1;
-            filter: brightness(1.1);
-            transform: scale(1.02) translateY(-5px);
+            filter: brightness(1.3);
+            transform: rotateY(0deg) scale(1.08) translateY(-10px);
+            box-shadow: 0 40px 80px rgba(34, 197, 94, 0.4),
+                        0 0 0 3px rgba(34, 197, 94, 0.8);
+            border-color: var(--brand-green);
+            z-index: 10;
         }
-        .scroll-item:active {
-            transform: scale(0.98);
+
+        .scroll-item .glow-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                #22c55e 50%, 
+                transparent 70%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
         }
+
+        .scroll-item:hover .glow-effect {
+            opacity: 1;
+            animation: borderRotate 2s linear infinite;
+        }
+
+        .scroll-item .wave-effect {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: linear-gradient(transparent, rgba(34, 197, 94, 0.2));
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .scroll-item.active .wave-effect,
+        .scroll-item:hover .wave-effect {
+            opacity: 1;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 30%; opacity: 0.2; }
+            50% { height: 50%; opacity: 0.4; }
+        }
+
         @media (max-width: 768px) {
             .scroll-item {
                 min-width: 280px;
-                opacity: 0.9;
+                opacity: 0.8;
+                transform: rotateY(5deg) scale(0.98);
+            }
+            .scroll-item.active {
+                transform: rotateY(0deg) scale(1.02);
             }
             .scroll-container {
                 gap: 1rem;
@@ -133,67 +403,100 @@
             }
         }
         
-        /* Indicador de scroll */
         .scroll-indicator {
             animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
         }
+
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(34, 197, 94, 0.4), transparent 70%);
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         @keyframes pulse {
             0%, 100% { opacity: 0.5; transform: translateX(0); }
-            50% { opacity: 1; transform: translateX(5px); }
+            50% { opacity: 1; transform: translateX(8px); text-shadow: 0 0 10px #22c55e; }
         }
         
-        /* Ajustes mobile para textos */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 3.5rem !important;
-                line-height: 1.1 !important;
-            }
-            .py-32 {
-                padding-top: 5rem !important;
-                padding-bottom: 5rem !important;
-            }
-            .pt-56 {
-                padding-top: 8rem !important;
-            }
-            .glass-card.p-12 {
-                padding: 2rem !important;
-                border-radius: 2rem !important;
-            }
-            .text-6xl {
-                font-size: 2.5rem !important;
-            }
+            h1 { font-size: 3.5rem !important; line-height: 1.1 !important; }
+            .py-32 { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+            .pt-56 { padding-top: 8rem !important; }
+            .glass-card.p-12 { padding: 2rem !important; border-radius: 2rem !important; }
+            .text-6xl { font-size: 2.5rem !important; }
         }
         
-        /* Melhorias no formulário mobile */
         @media (max-width: 768px) {
-            #qualificar .glass-card {
-                padding: 2rem !important;
-                border-radius: 2rem !important;
-            }
-            input, select {
-                font-size: 16px !important; /* Evita zoom no iOS */
-                padding: 0.75rem 0 !important;
-            }
-            .btn-glass, .btn-premium {
-                padding: 1.25rem !important;
-                width: 100%;
-            }
+            #qualificar .glass-card { padding: 2rem !important; border-radius: 2rem !important; }
+            input, select { font-size: 16px !important; padding: 0.75rem 0 !important; }
+            .btn-glass, .btn-premium { padding: 1.25rem !important; width: 100%; }
+        }
+
+        /* Estilo para input com sufixo */
+        .input-suffix {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .input-suffix:focus-within {
+            border-bottom-color: #22c55e;
+        }
+        .input-suffix input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0.5rem 0;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .input-suffix span {
+            color: #22c55e;
+            font-weight: bold;
+            font-size: 1rem;
+            padding-left: 0.5rem;
         }
     </style>
 </head>
 <body>
+    <!-- Partículas de fundo -->
+    <div id="particles"></div>
+
+    <!-- Botão flutuante de qualificar -->
+    <button onclick="scrollToQualify()" class="btn-qualificar-flutuante">
+        <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        Qualificar
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+        </svg>
+    </button>
 
     <div class="mesh-gradient"></div>
 
-    <!-- Navbar mantida igual -->
+    <!-- Navbar -->
     <nav class="fixed w-full z-50 border-b border-white/5 bg-black/40 backdrop-blur-2xl px-6 md:px-8 py-4 md:py-6 flex justify-between items-center">
         <div class="logo-font text-2xl md:text-4xl">Publicita.</div>
         <div class="hidden md:flex gap-10 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400">
             <a href="#sobre" class="hover:text-white transition-colors">Quem Somos</a>
             <a href="#como-funciona" class="hover:text-white transition-colors">Como Funciona</a>
+            <a href="#provas" class="hover:text-white transition-colors">Resultados</a>
             <a href="#qualificar" class="hover:text-white transition-colors">Qualificar</a>
         </div>
-        <!-- Menu mobile simplificado -->
         <div class="md:hidden text-green-500">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -201,9 +504,9 @@
         </div>
     </nav>
 
-    <!-- Hero section ajustada -->
+    <!-- Hero section -->
     <section class="relative pt-48 md:pt-56 pb-20 md:pb-32 px-4 md:px-6 overflow-hidden">
-        <div class="max-w-6xl mx-auto text-center" data-aos="fade-up">
+        <div class="max-w-6xl mx-auto text-center animate-on-scroll" id="hero">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-green-500/30 bg-green-500/5 text-green-400 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] mb-6 md:mb-8">
                 <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -215,22 +518,20 @@
                 NÃO FAZEMOS POSTS.<br> <span class="text-gradient font-black">GERAMOS ESCALA.</span>
             </h1>
             <p class="text-gray-400 text-base md:text-2xl max-w-3xl mx-auto mb-10 md:mb-14 font-medium leading-relaxed px-4">
-                A Publicita é a parceira de operações de Dropshipping em Moçambique que faturam consistentemente e querem <span class="text-white border-b-2 border-green-500 italic"> crescer e escalar mais.</span>
+                A Publicita é a parceira de operações de Dropshipping em Moçambique que faturam consistentemente e querem <span class="text-white border-b-2 border-green-500 italic">crescer e escalar mais.</span>
             </p>
-            <a href="#qualificar" class="btn-premium inline-block px-8 py-4 md:px-14 md:py-6 rounded-xl md:rounded-2xl text-xs md:text-sm font-black uppercase tracking-widest hover:scale-105 transition-all">
-                Quero me qualificar
-            </a>
         </div>
     </section>
 
-    <!-- SEÇÃO QUEM SOMOS (textos atualizados) -->
+    <!-- SEÇÃO QUEM SOMOS -->
     <section id="sobre" class="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto">
-        <div class="glass-card p-6 md:p-20 rounded-[30px] md:rounded-[60px]" data-aos="fade-up">
+        <div class="glass-card p-6 md:p-20 rounded-[30px] md:rounded-[60px] animate-on-scroll">
             <h2 class="text-3xl md:text-6xl font-black uppercase italic tracking-tighter mb-6 md:mb-8 text-green-500">Quem somos</h2>
             <div class="grid md:grid-cols-2 gap-8 md:gap-12">
                 <div class="text-gray-300 text-lg md:text-2xl leading-relaxed space-y-4 md:space-y-6">
                     <p>A Publicita é uma agência especializada em gestão de tráfego e criação de criativos para lojas de dropshipping.</p>
                     <p>Trabalhamos apenas com lojas que já estão a vender e querem escalar os resultados.</p>
+                    <p class="text-green-400 font-bold text-xl md:text-2xl mt-4">+1.000.000 MT em faturamento gerado para nossos clientes!</p>
                 </div>
                 <div class="bg-white/5 p-6 md:p-8 rounded-2xl md:rounded-3xl border border-white/10">
                     <p class="text-green-400 font-black uppercase tracking-widest text-xs md:text-sm mb-3 md:mb-4">Nosso foco é simples:</p>
@@ -243,19 +544,19 @@
 
     <!-- SEÇÃO COMO FUNCIONA -->
     <section id="como-funciona" class="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto">
-        <h2 class="text-3xl md:text-6xl font-black uppercase italic tracking-tighter mb-10 md:mb-16 text-center" data-aos="fade-up">Como funciona</h2>
+        <h2 class="text-3xl md:text-6xl font-black uppercase italic tracking-tighter mb-10 md:mb-16 text-center animate-on-scroll">Como funciona</h2>
         <div class="grid md:grid-cols-3 gap-4 md:gap-8">
-            <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px]" data-aos="fade-up" data-aos-delay="100">
+            <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px] animate-left">
                 <span class="text-4xl md:text-5xl font-black text-green-500/20 block mb-4 md:mb-6">01</span>
                 <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 uppercase">Analisamos sua loja</h3>
                 <p class="text-gray-400 text-sm md:text-base">Vemos seus produtos e anúncios atuais.</p>
             </div>
-            <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px]" data-aos="fade-up" data-aos-delay="200">
+            <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px] animate-scale">
                 <span class="text-4xl md:text-5xl font-black text-green-500/20 block mb-4 md:mb-6">02</span>
                 <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 uppercase">Criamos novos criativos</h3>
                 <p class="text-gray-400 text-sm md:text-base">Desenvolvemos anúncios pensados para vender.</p>
             </div>
-            <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px]" data-aos="fade-up" data-aos-delay="300">
+            <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px] animate-right">
                 <span class="text-4xl md:text-5xl font-black text-green-500/20 block mb-4 md:mb-6">03</span>
                 <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 uppercase">Gerimos seus anúncios</h3>
                 <p class="text-gray-400 text-sm md:text-base">Otimizamos campanhas para aumentar vendas.</p>
@@ -263,68 +564,113 @@
         </div>
     </section>
 
-    <!-- ENGINE DE CRIATIVOS - SEM BOTÕES E TEXTOS -->
+    <!-- SEÇÃO: PROVAS SOCIAIS (SEM ÍCONES 👤) -->
+    <section id="provas" class="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto">
+        <h2 class="text-3xl md:text-6xl font-black uppercase italic tracking-tighter mb-4 md:mb-8 text-center animate-on-scroll">
+            Clientes que <span class="text-gradient">ganharam placas</span>
+        </h2>
+        <p class="text-gray-400 text-center text-lg md:text-xl mb-12 md:mb-20 max-w-3xl mx-auto animate-on-scroll">
+            Resultados reais de quem confiou na Publicita para escalar o negócio
+        </p>
+        
+        <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+            <!-- Depoimento 1 - SEM ÍCONE -->
+            <div class="glass-card p-6 md:p-8 rounded-[30px] md:rounded-[40px] animate-left">
+                <div class="mb-4">
+                    <p class="text-xl font-bold">The BossMan</p>
+                    <p class="text-green-400 text-sm">•Dropshipping </p>
+                </div>
+                <img src="IMG-20260221-WA0076(1).jpg" alt="Placa de conquista" class="w-full rounded-2xl mb-4 border-2 border-green-500/30 hover:border-green-500 transition-all">
+                <p class="text-gray-300 text-sm md:text-base">
+                    "Depois que comecei a trabalhar com a Publicita, meu faturamento triplicou em 3 meses. A placa de 1 milhão chegou mais rápido do que imaginei!"
+                </p>
+            </div>
+
+            <!-- Depoimento 2 - SEM ÍCONE -->
+            <div class="glass-card p-6 md:p-8 rounded-[30px] md:rounded-[40px] animate-right">
+                <div class="mb-4">
+                    <p class="text-xl font-bold">Mais um cliente nosso</p>
+                    <p class="text-green-400 text-sm">•Dropshipping </p>
+                </div>
+                <img src="IMG-20260221-WA0075(1).jpg" alt="Placa de conquista" class="w-full rounded-2xl mb-4 border-2 border-green-500/30 hover:border-green-500 transition-all">
+                <p class="text-gray-300 text-sm md:text-base">
+                    "A Publicita não é só uma agência, é uma parceira. Alcancei a placa de 500k e já estou indo para o primeiro milhão!"
+                </p>
+            </div>
+        </div>
+
+        <!-- Badge extra -->
+        <div class="text-center mt-12 animate-scale">
+            <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-500/10 border border-green-500/30">
+                <span class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                <span class="text-sm font-bold tracking-wider">E VOCÊ PODE SER O PRÓXIMO</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENGINE DE CRIATIVOS -->
     <section id="criativos" class="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto">
-        <div class="flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-10 items-start md:items-end mb-6 md:mb-20" data-aos="fade-right">
+        <div class="flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-10 items-start md:items-end mb-6 md:mb-20 animate-on-scroll">
             <div>
                 <h2 class="text-3xl md:text-5xl font-black italic uppercase tracking-tighter mb-2">Engine de Criativos</h2>
                 <p class="text-gray-500 text-sm md:text-lg">Deslize para o lado → ver nossos cases</p>
             </div>
-            <!-- Indicador de scroll mobile -->
-            <div class="flex md:hidden items-center gap-2 text-green-500 text-xs font-bold scroll-indicator">
+            <div class="flex md:hidden items-center gap-2 text-green-500 text-xs font-bold scroll-indicator px-4 py-2 rounded-full bg-green-500/10 backdrop-blur-sm border border-green-500/30">
                 <span>DESLIZE</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 relative z-10">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
             </div>
         </div>
         
-        <!-- Container de scroll horizontal melhorado -->
-        <div class="scroll-container flex overflow-x-auto gap-3 md:gap-8 pb-6 md:pb-10 px-1" data-aos="fade-up">
+        <div class="scroll-container flex overflow-x-auto gap-3 md:gap-8 pb-12 md:pb-16 px-1 animate-scale" id="scrollContainer">
             <input type="file" id="videoUpload" accept="video/*" class="hidden">
             
-            <!-- Card 1: 2026-02-05-132852116.mp4 - SEM BOTÃO E TEXTO -->
-            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden">
+            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden group">
                 <video class="absolute inset-0 w-full h-full object-cover" loop muted playsinline autoplay>
                     <source src="2026-02-05-132852116.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay absolute inset-0"></div>
-                <!-- NADA MAIS - APENAS O VÍDEO -->
+                <div class="glow-effect"></div>
+                <div class="wave-effect"></div>
             </div>
 
-            <!-- Card 2: VID-20260221-WA0078.mp4 - SEM BOTÃO E TEXTO -->
-            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden">
+            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden group">
                 <video class="absolute inset-0 w-full h-full object-cover" loop muted playsinline autoplay>
                     <source src="VID-20260221-WA0078.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay absolute inset-0"></div>
-                <!-- NADA MAIS - APENAS O VÍDEO -->
+                <div class="glow-effect"></div>
+                <div class="wave-effect"></div>
             </div>
             
-            <!-- Card 3: VID-20260221-WA0079.mp4 - SEM BOTÃO E TEXTO -->
-            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden">
+            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden group">
                 <video class="absolute inset-0 w-full h-full object-cover" loop muted playsinline autoplay>
                     <source src="VID-20260221-WA0079.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay absolute inset-0"></div>
-                <!-- NADA MAIS - APENAS O VÍDEO -->
+                <div class="glow-effect"></div>
+                <div class="wave-effect"></div>
             </div>
 
-            <!-- Card 4: VID-20260221-WA0080.mp4 - SEM BOTÃO E TEXTO -->
-            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden">
+            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden group">
                 <video class="absolute inset-0 w-full h-full object-cover" loop muted playsinline autoplay>
                     <source src="VID-20260221-WA0080.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay absolute inset-0"></div>
-                <!-- NADA MAIS - APENAS O VÍDEO -->
+                <div class="glow-effect"></div>
+                <div class="wave-effect"></div>
             </div>
         </div>
-        <p class="text-center text-gray-600 text-xs mt-4 md:hidden">continue deslizando →</p>
+        <p class="text-center text-gray-600 text-xs mt-4 md:hidden animate-pulse"> Continue deslizando → </p>
     </section>
 
-    <!-- SEÇÃO QUALIFICAR ATUALIZADA COM CAMPO NOME E LINK OPCIONAL -->
+    <!-- SEÇÃO QUALIFICAR - COM CAMPO DE FATURAMENTO EDITÁVEL -->
     <section id="qualificar" class="py-20 md:py-40 px-4 md:px-6">
-        <div class="max-w-5xl mx-auto glass-card rounded-[30px] md:rounded-[60px] p-6 md:p-24 relative overflow-hidden text-center" data-aos="zoom-in">
+        <div class="max-w-5xl mx-auto glass-card rounded-[30px] md:rounded-[60px] p-6 md:p-24 relative overflow-hidden text-center animate-scale">
             <div class="absolute top-0 right-0 p-6 md:p-12 text-green-500/5 font-black text-[80px] md:text-[150px] uppercase pointer-events-none italic leading-none">Elite</div>
             
             <div class="relative z-10 mb-10 md:mb-16">
@@ -340,34 +686,32 @@
             </div>
 
             <div id="form-qualificar" class="relative z-10">
-                <form class="grid md:grid-cols-2 gap-6 md:gap-12 text-left">
+                <form id="qualificationForm" class="grid md:grid-cols-2 gap-6 md:gap-12 text-left">
                     <div class="space-y-6 md:space-y-10">
-                        <!-- Campo NOME adicionado -->
                         <div class="border-b border-white/10 focus-within:border-green-500 transition-colors">
                             <label class="block text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-1 md:mb-2">Seu Nome <span class="text-green-500">*</span></label>
-                            <input type="text" placeholder="Como se chama" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
+                            <input type="text" id="nome" placeholder="Como se chama" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
                         </div>
                         <div class="border-b border-white/10 focus-within:border-green-500 transition-colors">
                             <label class="block text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-1 md:mb-2">WhatsApp <span class="text-green-500">*</span></label>
-                            <input type="text" placeholder="+258" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
+                            <input type="text" id="whatsapp" placeholder="+258" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
                         </div>
                         <div class="border-b border-white/10 focus-within:border-green-500 transition-colors">
                             <label class="block text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-1 md:mb-2">Link da Loja <span class="text-gray-600">(opcional)</span></label>
-                            <input type="text" placeholder="minhaloja.com" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
+                            <input type="text" id="loja" placeholder="minhaloja.com" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
                             <p class="text-[8px] text-gray-600 mt-1">Se ainda não tem, pode colocar "Ainda estou desenvolvendo"</p>
                         </div>
                     </div>
                     <div class="space-y-6 md:space-y-10 flex flex-col justify-end">
                         <div class="group">
-                            <label class="block text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-2 md:mb-4">Faturamento Atual</label>
-                            <select class="w-full bg-black/50 border border-white/10 p-3 md:p-5 rounded-xl md:rounded-2xl outline-none focus:border-green-500 font-bold text-sm md:text-base appearance-none cursor-pointer">
-                                <option>Abaixo de 50.000 MT</option>
-                                <option selected>50.000 – 100.000 MT</option>
-                                <option>Acima de 100.000 MT</option>
-                            </select>
+                            <label class="block text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-2 md:mb-4">Quanto sua loja fatura por mês?</label>
+                            <div class="input-suffix">
+                                <input type="text" id="faturamento" placeholder="Ex: 75.000" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
+                                <span>MT</span>
+                            </div>
                         </div>
-                        <button class="btn-premium w-full py-4 md:py-6 rounded-xl md:rounded-3xl font-black uppercase tracking-widest text-xs md:text-sm hover:scale-[1.02] transition-all">
-                            Enviar para Análise
+                        <button type="button" onclick="enviarWhatsApp()" class="btn-premium w-full py-4 md:py-6 rounded-xl md:rounded-3xl font-black uppercase tracking-widest text-xs md:text-sm hover:scale-[1.02] transition-all">
+                            Enviar para Análise 
                         </button>
                     </div>
                 </form>
@@ -375,7 +719,7 @@
         </div>
     </section>
 
-    <!-- FOOTER ATUALIZADO COM LOGO -->
+    <!-- FOOTER -->
     <footer class="py-10 md:py-16 text-center border-t border-white/5">
         <p class="text-[8px] md:text-[10px] text-gray-600 font-black uppercase tracking-[0.2em] mb-4">Developed by</p>
         <img src="ei_1771694350645-removebg-preview.png" alt="Logo" class="h-20 md:h-28 mx-auto opacity-80 hover:opacity-100 transition-opacity">
@@ -383,17 +727,78 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ 
-            duration: 800, 
-            once: false,
-            disable: 'mobile' // Desativa AOS em mobile para performance
-        });
+        // Criar partículas de fundo
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = 10 + Math.random() * 20 + 's';
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Scroll animado
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.animate-on-scroll, .animate-left, .animate-right, .animate-scale');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (rect.top < windowHeight * 0.85) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('load', checkVisibility);
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('resize', checkVisibility);
+
+        AOS.init({ duration: 800, once: false, disable: true });
+
+        function scrollToQualify() {
+            document.getElementById('qualificar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
 
         function showForm() {
             document.getElementById('btn-show-form').style.display = 'none';
             document.getElementById('form-qualificar').style.display = 'block';
-            // Scroll suave até o formulário
             document.getElementById('form-qualificar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // NOVA FUNÇÃO: Enviar para WhatsApp
+        function enviarWhatsApp() {
+            const nome = document.getElementById('nome').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+            const loja = document.getElementById('loja').value.trim() || 'Não informado';
+            const faturamento = document.getElementById('faturamento').value.trim() || 'Não informado';
+
+            if (!nome || !whatsapp) {
+                alert('Por favor, preencha seu nome e WhatsApp!');
+                return;
+            }
+
+            const mensagem = `Saudações, Publicita. 👋\n\n` +
+                `Quero criativo para a minha loja/empresa e eis o meu formulário de qualificação:\n\n` +
+                `📋 *FORMULÁRIO DE QUALIFICAÇÃO*\n` +
+                `━━━━━━━━━━━━━━━━━━\n\n` +
+                `👤 *Nome:* ${nome}\n` +
+                `📱 *WhatsApp:* ${whatsapp}\n` +
+                `🛒 *Loja:* ${loja}\n` +
+                `💰 *Faturamento Mensal:* ${faturamento} MT\n\n` +
+                `━━━━━━━━━━━━━━━━━━\n` +
+                `Aguardando análise! 🚀`;
+
+            const numero = '258856428686'; // +258 85 642 8686
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+            
+            window.open(url, '_blank');
         }
 
         let clickCount = 0;
@@ -422,16 +827,45 @@
             }
         }
 
-        // Garantir que vídeos funcionem no mobile
+        // Card ativo no scroll
+        const scrollContainer = document.getElementById('scrollContainer');
+        const items = document.querySelectorAll('.scroll-item');
+
+        function updateActiveItem() {
+            if (!scrollContainer) return;
+            
+            const containerRect = scrollContainer.getBoundingClientRect();
+            const containerCenter = containerRect.left + containerRect.width / 2;
+
+            items.forEach(item => {
+                const itemRect = item.getBoundingClientRect();
+                const itemCenter = itemRect.left + itemRect.width / 2;
+                const distance = Math.abs(containerCenter - itemCenter);
+                const threshold = itemRect.width / 2;
+
+                if (distance < threshold) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', updateActiveItem);
+            window.addEventListener('resize', updateActiveItem);
+            setTimeout(updateActiveItem, 100);
+        }
+
+        // Vídeos
         document.addEventListener('DOMContentLoaded', function() {
             const videos = document.querySelectorAll('video');
             videos.forEach(video => {
                 video.play().catch(e => {
-                    // Autoplay pode ser bloqueado, mas tudo bem
-                    console.log('Autoplay bloqueado, mas funcionará quando visível');
+                    console.log('Autoplay bloqueado');
                 });
             });
         });
     </script>
 </body>
-</html>
+        </html>
