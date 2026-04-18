@@ -1,1094 +1,190 @@
 <!DOCTYPE html>
-<html lang="pt-MZ">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Publicita | Performance de Elite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Site Indisponível | Em Manutenção</title>
+    <!-- Google Fonts + Tailwind + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Meta Pixel Code -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '26873876125529425');
-    fbq('track', 'PageView');
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        primaryDark: '#0E42B3',
+                        secondary: '#36CFC9',
+                        warning: '#FF7D00',
+                        warningLight: '#FFF0E0',
+                        light: '#F8FAFE',
+                        dark: '#0B1A2F',
+                        slateText: '#334155',
+                        subtleBorder: '#E9EDF2',
+                        cardBg: '#FFFFFF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'elevated': '0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02)',
+                        'soft': '0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.05)',
+                        'button-hover': '0 12px 20px -12px rgba(22, 93, 255, 0.35)',
+                    },
+                    animation: {
+                        'float': 'float 5s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shimmer': 'shimmer 2.5s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    },
+                    backgroundSize: {
+                        '200%': '200%',
+                    }
+                }
+            }
+        }
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=26873876125529425&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-    
     <style>
-        :root { --brand-green: #22c55e; }
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+        /* refinamentos adicionais de micro-interação e suavidade */
+        body {
+            background: linear-gradient(135deg, #F8FAFE 0%, #F0F4FA 100%);
             scroll-behavior: smooth;
-            background-color: #080808; 
-            color: white;
-            overflow-x: hidden;
         }
-        
-        /* Animações */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Classes de animação */
-        .animate-on-scroll {
-            opacity: 0;
-            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        .animate-left.visible {
-            animation: fadeInLeft 1s ease forwards;
-        }
-
-        .animate-right.visible {
-            animation: fadeInRight 1s ease forwards;
-        }
-
-        .animate-scale.visible {
-            animation: scaleIn 1s ease forwards;
-        }
-
-        /* Partículas de fundo */
-        .particle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: #22c55e;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.3;
-            filter: blur(2px);
-            animation: floatParticle 10s infinite linear;
-            z-index: 0;
-        }
-
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
-        }
-
-        .logo-font {
-            font-weight: 800;
-            letter-spacing: -0.07em;
-            font-size: 1.8rem;
-        }
-        
-        .mesh-gradient {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -10%, rgba(34, 197, 94, 0.12) 0%, transparent 50%),
-                        radial-gradient(circle at 0% 100%, rgba(34, 197, 94, 0.05) 0%, transparent 40%);
-            z-index: -1;
-        }
-        
         .glass-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(34, 197, 94, 0.2); 
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .glass-card:hover {
-            border-color: var(--brand-green);
-            transform: translateY(-8px);
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.1);
-        }
-        
-        @media (max-width: 768px) {
-            .glass-card {
-                backdrop-filter: blur(8px);
-            }
-            .glass-card:active {
-                transform: scale(0.98);
-                border-color: var(--brand-green);
-            }
-        }
-        
-        .text-gradient {
-            background: linear-gradient(135deg, #fff 0%, #22c55e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .btn-premium {
-            background: #22c55e; 
-            color: black;
-            font-weight: 800;
-            box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.4);
-        }
-        
-        .btn-glass, .btn-qualificar-flutuante {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            font-weight: 800;
+            backdrop-filter: blur(0px);
+            background: rgba(255, 255, 255, 0.96);
             transition: all 0.3s ease;
         }
-        
-        .btn-glass:hover, .btn-qualificar-flutuante:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--brand-green);
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+        .reload-btn {
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-
-        /* Botão flutuante */
-        .btn-qualificar-flutuante {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            padding: 1rem 2rem;
-            border-radius: 3rem;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            animation: float 3s ease-in-out infinite;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .reload-btn:active {
+            transform: scale(0.96);
         }
-
-        .btn-qualificar-flutuante::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #22c55e, transparent, #22c55e);
-            border-radius: 3rem;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .warning-icon-bg {
+            background: radial-gradient(circle at 30% 20%, rgba(255,125,0,0.08), transparent 70%);
         }
-
-        .btn-qualificar-flutuante:hover::before {
-            opacity: 0.5;
-            animation: borderRotate 3s linear infinite;
+        @media (prefers-reduced-motion: reduce) {
+            .animate-float { animation: none; }
         }
-
-        @keyframes borderRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-            .btn-qualificar-flutuante {
-                bottom: 1rem;
-                right: 1rem;
-                padding: 0.75rem 1.5rem;
-                font-size: 0.7rem;
-            }
-        }
-        
-        .video-overlay {
-            background: radial-gradient(circle at center, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
-        }
-        
-        #form-qualificar { display: none; }
-        
-        /* Scroll animado */
-        .scroll-container {
-            -webkit-overflow-scrolling: touch;
-            scroll-snap-type: x mandatory;
-            gap: 1.5rem;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-            scrollbar-width: thin;
-            scrollbar-color: #22c55e #1a1a1a;
-            cursor: grab;
-            transition: all 0.3s ease;
-            position: relative;
-            perspective: 1000px;
-        }
-        
-        .scroll-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(34, 197, 94, 0.2) 50%, 
-                transparent 100%);
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0;
-            animation: scanner 4s ease-in-out infinite;
-        }
-
-        @keyframes scanner {
-            0%, 100% { opacity: 0; transform: translateX(-100%); }
-            50% { opacity: 0.5; transform: translateX(100%); }
-        }
-
-        .scroll-container:active { cursor: grabbing; }
-        
-        .scroll-container::-webkit-scrollbar { height: 6px; }
-        .scroll-container::-webkit-scrollbar-track {
-            background: #1a1a1a;
-            border-radius: 20px;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
-        }
-        .scroll-container::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, #22c55e, #4ade80, #22c55e);
-            border-radius: 20px;
-            box-shadow: 0 0 20px #22c55e, 0 0 40px #22c55e;
-            animation: glowPulse 2s ease-in-out infinite;
-        }
-        
-        .scroll-item {
-            scroll-snap-align: start;
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            opacity: 0.7;
-            filter: brightness(0.8) blur(1px);
-            transform: rotateY(10deg) scale(0.95);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        .scroll-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s ease;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .scroll-item:hover::after { left: 150%; }
-
-        .scroll-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, 
-                rgba(34, 197, 94, 0.3) 0%, 
-                transparent 50%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .scroll-item.active {
-            opacity: 1;
-            filter: brightness(1.2) blur(0);
-            transform: rotateY(0deg) scale(1.05);
-            box-shadow: 0 30px 60px rgba(34, 197, 94, 0.3),
-                        0 0 0 2px rgba(34, 197, 94, 0.5) inset;
-        }
-
-        .scroll-item.active::before {
-            opacity: 1;
-            animation: particlePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes particlePulse {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-            50% { transform: scale(1.2) rotate(5deg); opacity: 0.6; }
-        }
-
-        .scroll-item:hover {
-            opacity: 1;
-            filter: brightness(1.3);
-            transform: rotateY(0deg) scale(1.08) translateY(-10px);
-            box-shadow: 0 40px 80px rgba(34, 197, 94, 0.4),
-                        0 0 0 3px rgba(34, 197, 94, 0.8);
-            border-color: var(--brand-green);
-            z-index: 10;
-        }
-
-        .scroll-item .glow-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: inherit;
-            padding: 2px;
-            background: linear-gradient(45deg, 
-                transparent 30%, 
-                #22c55e 50%, 
-                transparent 70%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-        }
-
-        .scroll-item:hover .glow-effect {
-            opacity: 1;
-            animation: borderRotate 2s linear infinite;
-        }
-
-        .scroll-item .wave-effect {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 30%;
-            background: linear-gradient(transparent, rgba(34, 197, 94, 0.2));
-            filter: blur(10px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .scroll-item.active .wave-effect,
-        .scroll-item:hover .wave-effect {
-            opacity: 1;
-            animation: wave 2s ease-in-out infinite;
-        }
-
-        @keyframes wave {
-            0%, 100% { height: 30%; opacity: 0.2; }
-            50% { height: 50%; opacity: 0.4; }
-        }
-
-        @media (max-width: 768px) {
-            .scroll-item {
-                min-width: 280px;
-                opacity: 0.8;
-                transform: rotateY(5deg) scale(0.98);
-            }
-            .scroll-item.active {
-                transform: rotateY(0deg) scale(1.02);
-            }
-            .scroll-container {
-                gap: 1rem;
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-        }
-        
-        .scroll-indicator {
-            animation: pulse 2s infinite;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .scroll-indicator::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(34, 197, 94, 0.4), transparent 70%);
-            animation: rotate 4s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: translateX(0); }
-            50% { opacity: 1; transform: translateX(8px); text-shadow: 0 0 10px #22c55e; }
-        }
-        
-        @media (max-width: 768px) {
-            h1 { font-size: 3.5rem !important; line-height: 1.1 !important; }
-            .py-32 { padding-top: 5rem !important; padding-bottom: 5rem !important; }
-            .pt-56 { padding-top: 8rem !important; }
-            .glass-card.p-12 { padding: 2rem !important; border-radius: 2rem !important; }
-            .text-6xl { font-size: 2.5rem !important; }
-        }
-        
-        @media (max-width: 768px) {
-            #qualificar .glass-card { padding: 2rem !important; border-radius: 2rem !important; }
-            input, select { font-size: 16px !important; padding: 0.75rem 0 !important; }
-            .btn-glass, .btn-premium { padding: 1.25rem !important; width: 100%; }
-        }
-
-        /* Estilo para input com sufixo */
-        .input-suffix {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .input-suffix:focus-within {
-            border-bottom-color: #22c55e;
-        }
-        .input-suffix input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            padding: 0.5rem 0;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-        .input-suffix span {
-            color: #22c55e;
-            font-weight: bold;
-            font-size: 1rem;
-            padding-left: 0.5rem;
-        }
-
-        /* Estilo para o modal da Vantix */
-        .vantix-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(20px);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .vantix-modal.active {
-            display: flex;
-        }
-
-        .vantix-card {
-            background: linear-gradient(145deg, rgba(34, 197, 94, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 2rem;
-            padding: 2rem;
-            max-width: 90%;
-            width: 400px;
-            text-align: center;
-            animation: scaleIn 0.3s ease;
-        }
-
-        .vantix-card h3 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #22c55e;
-            margin-bottom: 1.5rem;
-        }
-
-        .vantix-info {
-            text-align: left;
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 1rem;
-        }
-
-        .vantix-info p {
-            margin: 0.8rem 0;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .vantix-info p svg {
-            width: 20px;
-            height: 20px;
-            color: #22c55e;
-        }
-
-        .btn-vantix-wa {
-            background: #25D366;
-            color: white;
-            font-weight: bold;
-            padding: 0.8rem 1.5rem;
-            border-radius: 2rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .btn-vantix-wa:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* CTA ao redor do logotipo */
-        .vantix-cta {
-            position: relative;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .vantix-cta .cta-text {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(34, 197, 94, 0.9);
-            color: black;
-            font-size: 0.7rem;
-            font-weight: bold;
-            padding: 0.2rem 0.8rem;
-            border-radius: 2rem;
-            white-space: nowrap;
-            animation: pulse 1.5s infinite;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .vantix-cta .pulse-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: rgba(34, 197, 94, 0.3);
-            animation: ringPulse 1.5s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes ringPulse {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
-            50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+        /* detalhe de linha sutil no rodapé */
+        footer p {
+            letter-spacing: -0.01em;
         }
     </style>
 </head>
-<body>
-    <!-- Partículas de fundo -->
-    <div id="particles"><div class="particle" style="left: 88.0723%; animation-delay: 8.37108s; animation-duration: 17.4266s; width: 7.76788px; height: 7.76788px;"></div><div class="particle" style="left: 38.5532%; animation-delay: 6.11115s; animation-duration: 23.636s; width: 3.67433px; height: 3.67433px;"></div><div class="particle" style="left: 47.2977%; animation-delay: 5.42518s; animation-duration: 13.4524s; width: 7.28642px; height: 7.28642px;"></div><div class="particle" style="left: 83.7705%; animation-delay: 3.03807s; animation-duration: 18.5489s; width: 4.53948px; height: 4.53948px;"></div><div class="particle" style="left: 36.1126%; animation-delay: 6.37441s; animation-duration: 20.8947s; width: 4.72902px; height: 4.72902px;"></div><div class="particle" style="left: 40.7915%; animation-delay: 8.19361s; animation-duration: 19.7526s; width: 7.91083px; height: 7.91083px;"></div><div class="particle" style="left: 95.3989%; animation-delay: 9.11443s; animation-duration: 22.843s; width: 3.84087px; height: 3.84087px;"></div><div class="particle" style="left: 45.3278%; animation-delay: 5.85936s; animation-duration: 27.2278s; width: 6.26143px; height: 6.26143px;"></div><div class="particle" style="left: 91.1095%; animation-delay: 8.02045s; animation-duration: 12.5382s; width: 3.40258px; height: 3.40258px;"></div><div class="particle" style="left: 92.9704%; animation-delay: 6.86157s; animation-duration: 27.7449s; width: 4.87968px; height: 4.87968px;"></div><div class="particle" style="left: 13.4468%; animation-delay: 9.47225s; animation-duration: 28.113s; width: 6.59988px; height: 6.59988px;"></div><div class="particle" style="left: 61.2777%; animation-delay: 8.4757s; animation-duration: 26.9457s; width: 2.55828px; height: 2.55828px;"></div><div class="particle" style="left: 98.3473%; animation-delay: 8.73038s; animation-duration: 18.9514s; width: 5.73948px; height: 5.73948px;"></div><div class="particle" style="left: 79.6225%; animation-delay: 7.63198s; animation-duration: 16.1439s; width: 5.43674px; height: 5.43674px;"></div><div class="particle" style="left: 80.2681%; animation-delay: 8.65194s; animation-duration: 10.6042s; width: 4.0803px; height: 4.0803px;"></div><div class="particle" style="left: 33.3765%; animation-delay: 5.45755s; animation-duration: 14.4727s; width: 6.77927px; height: 6.77927px;"></div><div class="particle" style="left: 79.4907%; animation-delay: 7.01962s; animation-duration: 27.1813s; width: 5.96818px; height: 5.96818px;"></div><div class="particle" style="left: 14.0102%; animation-delay: 4.94823s; animation-duration: 24.6114s; width: 2.30405px; height: 2.30405px;"></div><div class="particle" style="left: 11.0075%; animation-delay: 6.77893s; animation-duration: 17.3922s; width: 6.39458px; height: 6.39458px;"></div><div class="particle" style="left: 48.2715%; animation-delay: 0.9446s; animation-duration: 26.0687s; width: 3.02122px; height: 3.02122px;"></div><div class="particle" style="left: 13.2508%; animation-delay: 5.07995s; animation-duration: 10.4865s; width: 4.78977px; height: 4.78977px;"></div><div class="particle" style="left: 32.172%; animation-delay: 8.65304s; animation-duration: 10.7325s; width: 7.84188px; height: 7.84188px;"></div><div class="particle" style="left: 85.1676%; animation-delay: 2.83788s; animation-duration: 16.1527s; width: 2.92953px; height: 2.92953px;"></div><div class="particle" style="left: 61.2831%; animation-delay: 1.80058s; animation-duration: 26.0909s; width: 3.05779px; height: 3.05779px;"></div><div class="particle" style="left: 59.9706%; animation-delay: 9.51805s; animation-duration: 14.5453s; width: 3.51113px; height: 3.51113px;"></div><div class="particle" style="left: 84.5331%; animation-delay: 3.91807s; animation-duration: 14.4797s; width: 2.42741px; height: 2.42741px;"></div><div class="particle" style="left: 51.0264%; animation-delay: 7.16093s; animation-duration: 19.321s; width: 3.5044px; height: 3.5044px;"></div><div class="particle" style="left: 41.8263%; animation-delay: 1.18257s; animation-duration: 24.4417s; width: 2.46006px; height: 2.46006px;"></div><div class="particle" style="left: 79.3601%; animation-delay: 0.746406s; animation-duration: 18.8145s; width: 5.48565px; height: 5.48565px;"></div><div class="particle" style="left: 0.315319%; animation-delay: 7.79889s; animation-duration: 21.3074s; width: 5.38595px; height: 5.38595px;"></div></div>
+<body class="min-h-screen flex flex-col items-center justify-center p-5 md:p-8 font-sans">
 
-    <!-- Modal da Vantix -->
-    <div id="vantixModal" class="vantix-modal">
-        <button class="close-modal" onclick="closeVantixModal()">✕</button>
-        <div class="vantix-card">
-            <h3>⚡ VANTIX</h3>
-            <div class="vantix-info">
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.362-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                    </svg>
-                    +258 870293855
-                </p>
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3.75L9.75 21.75" />
-                    </svg>
-                    @Vantix techh
-                </p>
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                    </svg>
-                    @vantixtech_k
-                </p>
+    <!-- Container principal com card elegante e maior refinamento visual -->
+    <div class="w-full max-w-2xl mx-auto">
+        <div class="glass-card rounded-3xl shadow-elevated border border-subtleBorder/60 overflow-hidden transition-all duration-500 hover:shadow-xl">
+            
+            <!-- Área decorativa superior com gradiente sutil -->
+            <div class="h-2 bg-gradient-to-r from-primary via-secondary to-warning opacity-70"></div>
+            
+            <div class="p-8 md:p-10 lg:p-12">
+                <!-- Icone redesenho: círculo suave + ícone melhor posicionado e animado -->
+                <div class="flex justify-center mb-7 relative">
+                    <div class="relative warning-icon-bg rounded-full p-4 inline-flex">
+                        <div class="absolute inset-0 rounded-full bg-warning/5 animate-pulse-slow"></div>
+                        <svg class="w-28 h-28 md:w-32 md:h-32 text-warning relative z-10 animate-float drop-shadow-md" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Título com maior hierarquia e text-shadow suave -->
+                <h1 class="text-[clamp(1.8rem,6vw,2.8rem)] font-extrabold text-center tracking-tight bg-gradient-to-r from-dark to-slate-700 bg-clip-text text-transparent mb-4 leading-tight">
+                    Site Indisponível no Momento
+                </h1>
+                
+                <!-- Divider sutil para separar conteúdo -->
+                <div class="w-16 h-1 bg-primary/20 rounded-full mx-auto my-5"></div>
+                
+                <!-- Mensagem secundária com tipografia mais legível e toque de elegância -->
+                <div class="bg-warningLight/30 rounded-2xl p-5 md:p-6 border border-warning/10 shadow-soft transition-all">
+                    <p class="text-[clamp(0.95rem,2vw,1.075rem)] text-slateText leading-relaxed md:leading-relaxed text-center font-medium">
+                        Informamos que este site encontra-se temporariamente indisponível, em virtude da não regularização dos pagamentos devidos pelo seu proprietário para a manutenção do serviço.
+                    </p>
+                    <div class="flex justify-center my-4">
+                        <div class="w-10 h-[2px] bg-warning/20 rounded-full"></div>
+                    </div>
+                    <p class="text-[clamp(0.9rem,2vw,1rem)] text-slate-600 leading-relaxed text-center">
+                        Pedimos sinceras desculpas pelo transtorno causado e agradecemos a sua compreensão. Por gentileza, tente acessar novamente em momento oportuno.
+                    </p>
+                </div>
+
+                <!-- Botão de ação refinado + micro interação -->
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button onclick="window.location.reload()" 
+                            class="reload-btn group relative bg-primary hover:bg-primaryDark text-white font-semibold py-3.5 px-9 rounded-xl transition-all duration-300 shadow-md hover:shadow-button-hover flex items-center gap-2 text-base md:text-lg tracking-wide overflow-hidden">
+                        <svg class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        <span>Tente Mais Tarde</span>
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white/30 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                    </button>
+                    
+                    <!-- Dica sutil de atualização para dar confiança -->
+                    <div class="text-xs text-slate-400 flex items-center gap-1 bg-white/60 px-3 py-1.5 rounded-full shadow-sm">
+                        <i class="fa fa-refresh text-[11px]" aria-hidden="true"></i>
+                        <span>Atualize a página ou tente mais tarde</span>
+                    </div>
+                </div>
             </div>
-            <button onclick="openVantixWhatsApp()" class="btn-vantix-wa">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.52 3.48C18.26 1.21 15.17 0 12 0 5.37 0 0 5.37 0 12c0 2.12.55 4.18 1.61 6.01L0 24l6.07-1.6c1.75.95 3.73 1.46 5.73 1.46 6.63 0 12-5.37 12-12 0-3.17-1.21-6.26-3.48-8.52zM12 21.6c-1.78 0-3.54-.48-5.06-1.38l-.36-.22-3.6.96.96-3.52-.24-.37C2.87 15.05 2.4 13.55 2.4 12 2.4 6.72 6.72 2.4 12 2.4c2.56 0 4.97 1 6.78 2.81 1.81 1.81 2.81 4.22 2.81 6.78 0 5.28-4.32 9.61-9.59 9.61zm5.27-7.2c-.3-.15-1.77-.87-2.05-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.96 1.17-.18.2-.36.22-.66.07-.3-.15-1.26-.47-2.4-1.48-.88-.78-1.48-1.74-1.65-2.03-.18-.3-.02-.46.14-.61.14-.14.3-.37.45-.55.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.68-1.63-.93-2.23-.25-.6-.5-.5-.68-.5-.18 0-.38-.02-.58-.02-.2 0-.52.08-.8.38-.28.3-1.07 1.04-1.07 2.54s1.1 2.94 1.25 3.14c.15.2 2.16 3.3 5.23 4.63.73.31 1.3.5 1.75.64.73.23 1.4.2 1.93.12.59-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.43-.08-.13-.3-.2-.6-.35z"/>
-                </svg>
-                Falar com Vantix
-            </button>
+        </div>
+
+        <!-- Selo de confiança / elemento visual extra com status code -->
+        <div class="flex flex-wrap justify-center items-center gap-3 mt-8 text-center">
+            <div class="bg-white/50 backdrop-blur-sm rounded-full px-4 py-1.5 shadow-sm border border-white/80">
+                <span class="text-xs font-mono text-slate-500 flex items-center gap-1.5">
+                    <span class="inline-block w-2 h-2 rounded-full bg-warning animate-pulse"></span>
+                    HTTP 503 · Serviço temporário indisponível
+                </span>
+            </div>
         </div>
     </div>
 
-    <!-- Botão flutuante de qualificar -->
-    <button onclick="scrollToQualify()" class="btn-qualificar-flutuante">
-        <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-        </span>
-        Qualificar
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-        </svg>
-    </button>
-
-    <div class="mesh-gradient"></div>
-
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 border-b border-white/5 bg-black/40 backdrop-blur-2xl px-6 md:px-8 py-4 md:py-6 flex justify-between items-center">
-        <div class="logo-font text-2xl md:text-4xl">Publicita.</div>
-        <div class="hidden md:flex gap-10 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400">
-            <a href="#sobre" class="hover:text-white transition-colors">Quem Somos</a>
-            <a href="#como-funciona" class="hover:text-white transition-colors">Como Funciona</a>
-            <a href="#provas" class="hover:text-white transition-colors">Resultados</a>
-            <a href="#qualificar" class="hover:text-white transition-colors">Qualificar</a>
-        </div>
-        <div class="md:hidden text-green-500">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </div>
-    </nav>
-
-    <!-- Hero section -->
-    <section class="relative pt-48 md:pt-56 pb-20 md:pb-32 px-4 md:px-6 overflow-hidden">
-        <div class="max-w-6xl mx-auto text-center animate-on-scroll" id="hero">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-green-500/30 bg-green-500/5 text-green-400 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] mb-6 md:mb-8">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                Vagas limitadas para Fevereiro/2026
+    <!-- Rodapé redesenhado mais clean, com linha separadora fina -->
+    <footer class="mt-16 w-full max-w-lg text-center border-t border-subtleBorder/70 pt-7 pb-4 px-4">
+        <div class="flex flex-col items-center gap-2">
+            <div class="flex items-center gap-2 text-slate-400 text-xs uppercase tracking-wider">
+                <i class="fa fa-code fa-fw" aria-hidden="true"></i>
+                <span class="font-medium">Plataforma gerenciada</span>
+                <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                <i class="fa fa-shield fa-fw"></i>
             </div>
-            <h1 class="text-5xl md:text-[110px] font-extrabold leading-[0.9] tracking-tighter mb-6 md:mb-10 px-2">
-                NÃO FAZEMOS POSTS.<br> <span class="text-gradient font-black">GERAMOS ESCALA.</span>
-            </h1>
-            <p class="text-gray-400 text-base md:text-2xl max-w-3xl mx-auto mb-10 md:mb-14 font-medium leading-relaxed px-4">
-                A Publicita é a parceira de operações de Dropshipping em Moçambique que faturam consistentemente e querem <span class="text-white border-b-2 border-green-500 italic">crescer e escalar mais.</span>
-            </p>
-        </div>
-    </section>
-
-    <!-- SEÇÃO QUEM SOMOS -->
-    <section id="sobre" class="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto">
-        <div class="glass-card p-6 md:p-20 rounded-[30px] md:rounded-[60px] animate-on-scroll">
-            <h2 class="text-3xl md:text-6xl font-black uppercase italic tracking-tighter mb-6 md:mb-8 text-green-500">Quem somos</h2>
-            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-                <div class="text-gray-300 text-lg md:text-2xl leading-relaxed space-y-4 md:space-y-6">
-                    <p>A Publicita é uma agência especializada em gestão de tráfego e criação de criativos para lojas de dropshipping.</p>
-                    <p>Trabalhamos apenas com lojas que já estão a vender e querem escalar os resultados.</p>
-                    <p class="text-green-400 font-bold text-xl md:text-2xl mt-4">+1.000.000 MT em faturamento gerado para nossos clientes!</p>
-                </div>
-                <div class="bg-white/5 p-6 md:p-8 rounded-2xl md:rounded-3xl border border-white/10">
-                    <p class="text-green-400 font-black uppercase tracking-widest text-xs md:text-sm mb-3 md:mb-4">Nosso foco é simples:</p>
-                    <p class="text-xl md:text-3xl font-bold mb-4 md:mb-6">Mais vendas através de anúncios melhores.</p>
-                    <p class="text-gray-500 text-sm md:text-base italic">Não trabalhamos com iniciantes. Trabalhamos com quem quer crescer.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEÇÃO COMO FUNCIONA -->
-    <section id="como-funciona" class="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto">
-        <h2 class="text-3xl md:text-6xl font-black uppercase italic tracking-tighter mb-10 md:mb-16 text-center animate-on-scroll">Como funciona</h2>
-        <div class="grid md:grid-cols-3 gap-4 md:gap-8">
-            <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px] animate-left">
-                <span class="text-4xl md:text-5xl font-black text-green-500/20 block mb-4 md:mb-6">01</span>
-                <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 uppercase">Analisamos sua loja</h3>
-                <p class="text-gray-400 text-sm md:text-base">Vemos seus produtos e anúncios atuais.</p>
-            </div>
-            <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px] animate-scale">
-                <span class="text-4xl md:text-5xl font-black text-green-500/20 block mb-4 md:mb-6">02</span>
-                <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 uppercase">Criamos novos criativos</h3>
-                <p class="text-gray-400 text-sm md:text-base">Desenvolvemos anúncios pensados para vender.</p>
-            </div>
-            <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px] animate-right">
-                <span class="text-4xl md:text-5xl font-black text-green-500/20 block mb-4 md:mb-6">03</span>
-                <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 uppercase">Gerimos seus anúncios</h3>
-                <p class="text-gray-400 text-sm md:text-base">Otimizamos campanhas para aumentar vendas.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEÇÃO: PROVAS SOCIAIS (SEM ÍCONES 👤) -->
-    <section id="provas" class="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto">
-        <h2 class="text-3xl md:text-6xl font-black uppercase italic tracking-tighter mb-4 md:mb-8 text-center animate-on-scroll">
-            Clientes que <span class="text-gradient">ganharam placas</span>
-        </h2>
-        <p class="text-gray-400 text-center text-lg md:text-xl mb-12 md:mb-20 max-w-3xl mx-auto animate-on-scroll">
-            Resultados reais de quem confiou na Publicita para escalar o negócio
-        </p>
-        
-        <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-            <!-- Depoimento 1 - SEM ÍCONE -->
-            <div class="glass-card p-6 md:p-8 rounded-[30px] md:rounded-[40px] animate-left">
-                <div class="mb-4">
-                    <p class="text-xl font-bold">The BossMan</p>
-                    <p class="text-green-400 text-sm">•Dropshipping </p>
-                </div>
-                <img src="IMG-20260221-WA0076(1).jpg" alt="Placa de conquista" class="w-full rounded-2xl mb-4 border-2 border-green-500/30 hover:border-green-500 transition-all">
-                <p class="text-gray-300 text-sm md:text-base">
-                    "Depois que comecei a trabalhar com a Publicita, meu faturamento triplicou em 3 meses. A placa de 1 milhão chegou mais rápido do que imaginei!"
-                </p>
-            </div>
-
-            <!-- Depoimento 2 - SEM ÍCONE -->
-            <div class="glass-card p-6 md:p-8 rounded-[30px] md:rounded-[40px] animate-right">
-                <div class="mb-4">
-                    <p class="text-xl font-bold">Mais um cliente nosso</p>
-                    <p class="text-green-400 text-sm">•Dropshipping </p>
-                </div>
-                <img src="IMG-20260221-WA0075(1).jpg" alt="Placa de conquista" class="w-full rounded-2xl mb-4 border-2 border-green-500/30 hover:border-green-500 transition-all">
-                <p class="text-gray-300 text-sm md:text-base">
-                    "A Publicita não é só uma agência, é uma parceira. Alcancei a placa de 500k e já estou indo para o primeiro milhão!"
-                </p>
-            </div>
-        </div>
-
-        <!-- Badge extra -->
-        <div class="text-center mt-12 animate-scale">
-            <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-500/10 border border-green-500/30">
-                <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-                <span class="text-sm font-bold tracking-wider">E VOCÊ PODE SER O PRÓXIMO</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- ENGINE DE CRIATIVOS -->
-    <section id="criativos" class="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto">
-        <div class="flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-10 items-start md:items-end mb-6 md:mb-20 animate-on-scroll">
-            <div>
-                <h2 class="text-3xl md:text-5xl font-black italic uppercase tracking-tighter mb-2">Engine de Criativos</h2>
-                <p class="text-gray-500 text-sm md:text-lg">Deslize para o lado → ver nossos cases</p>
-            </div>
-            <div class="flex md:hidden items-center gap-2 text-green-500 text-xs font-bold scroll-indicator px-4 py-2 rounded-full bg-green-500/10 backdrop-blur-sm border border-green-500/30">
-                <span>DESLIZE</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 relative z-10">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-            </div>
-        </div>
-        
-        <div class="scroll-container flex overflow-x-auto gap-3 md:gap-8 pb-12 md:pb-16 px-1 animate-scale" id="scrollContainer">
-            <input type="file" id="videoUpload" accept="video/*" class="hidden">
-            
-            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden group">
-                <video class="absolute inset-0 w-full h-full object-cover" loop muted playsinline autoplay>
-                    <source src="2026-02-05-132852116.mp4" type="video/mp4">
-                </video>
-                <div class="video-overlay absolute inset-0"></div>
-                <div class="glow-effect"></div>
-                <div class="wave-effect"></div>
-            </div>
-
-            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden group">
-                <video class="absolute inset-0 w-full h-full object-cover" loop muted playsinline autoplay>
-                    <source src="VID-20260221-WA0078.mp4" type="video/mp4">
-                </video>
-                <div class="video-overlay absolute inset-0"></div>
-                <div class="glow-effect"></div>
-                <div class="wave-effect"></div>
-            </div>
-            
-            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden group">
-                <video class="absolute inset-0 w-full h-full object-cover" loop muted playsinline autoplay>
-                    <source src="VID-20260221-WA0079.mp4" type="video/mp4">
-                </video>
-                <div class="video-overlay absolute inset-0"></div>
-                <div class="glow-effect"></div>
-                <div class="wave-effect"></div>
-            </div>
-
-            <div onclick="handleSecretClick(this)" class="scroll-item glass-card min-w-[260px] md:min-w-[400px] aspect-[9/16] rounded-[30px] md:rounded-[40px] cursor-pointer relative overflow-hidden group">
-                <video class="absolute inset-0 w-full h-full object-cover" loop muted playsinline autoplay>
-                    <source src="VID-20260221-WA0080.mp4" type="video/mp4">
-                </video>
-                <div class="video-overlay absolute inset-0"></div>
-                <div class="glow-effect"></div>
-                <div class="wave-effect"></div>
-            </div>
-        </div>
-        <p class="text-center text-gray-600 text-xs mt-4 md:hidden animate-pulse"> Continue deslizando → </p>
-    </section>
-
-    <!-- SEÇÃO QUALIFICAR - COM CAMPO DE FATURAMENTO EDITÁVEL -->
-    <section id="qualificar" class="py-20 md:py-40 px-4 md:px-6">
-        <div class="max-w-5xl mx-auto glass-card rounded-[30px] md:rounded-[60px] p-6 md:p-24 relative overflow-hidden text-center animate-scale">
-            <div class="absolute top-0 right-0 p-6 md:p-12 text-green-500/5 font-black text-[80px] md:text-[150px] uppercase pointer-events-none italic leading-none">Elite</div>
-            
-            <div class="relative z-10 mb-10 md:mb-16">
-                <h2 class="text-3xl md:text-6xl font-black mb-4 md:mb-8 tracking-tighter uppercase">Trabalhamos com lojas que vendem</h2>
-                <p class="text-gray-300 max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-4 md:mb-8 px-2">
-                    Para manter a qualidade dos resultados, trabalhamos apenas com lojas que já estão a vender.
-                </p>
-                <p class="text-gray-500 text-sm md:text-base mb-8 md:mb-12">Se sua loja já está nesse nível, pode se qualificar abaixo.</p>
-                
-                <button id="btn-show-form" onclick="showForm()" class="btn-glass px-8 py-4 md:px-14 md:py-6 rounded-xl md:rounded-2xl text-xs md:text-sm uppercase tracking-widest hover:scale-105 transition-all">
-                    Quero me qualificar
-                </button>
-            </div>
-
-            <div id="form-qualificar" class="relative z-10">
-                <form id="qualificationForm" class="grid md:grid-cols-2 gap-6 md:gap-12 text-left">
-                    <div class="space-y-6 md:space-y-10">
-                        <div class="border-b border-white/10 focus-within:border-green-500 transition-colors">
-                            <label class="block text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-1 md:mb-2">Seu Nome <span class="text-green-500">*</span></label>
-                            <input type="text" id="nome" placeholder="Como se chama" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
-                        </div>
-                        <div class="border-b border-white/10 focus-within:border-green-500 transition-colors">
-                            <label class="block text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-1 md:mb-2">WhatsApp <span class="text-green-500">*</span></label>
-                            <input type="text" id="whatsapp" placeholder="+258" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
-                        </div>
-                        <div class="border-b border-white/10 focus-within:border-green-500 transition-colors">
-                            <label class="block text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-1 md:mb-2">Link da Loja <span class="text-gray-600">(opcional)</span></label>
-                            <input type="text" id="loja" placeholder="minhaloja.com" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
-                            <p class="text-[8px] text-gray-600 mt-1">Se ainda não tem, pode colocar "Ainda estou desenvolvendo"</p>
-                        </div>
-                    </div>
-                    <div class="space-y-6 md:space-y-10 flex flex-col justify-end">
-                        <div class="group">
-                            <label class="block text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-2 md:mb-4">Quanto sua loja fatura por mês?</label>
-                            <div class="input-suffix">
-                                <input type="text" id="faturamento" placeholder="Ex: 75.000" class="w-full bg-transparent py-2 md:py-4 outline-none font-bold text-base md:text-xl">
-                                <span>MT</span>
-                            </div>
-                        </div>
-                        <button type="button" onclick="enviarWhatsApp()" class="btn-premium w-full py-4 md:py-6 rounded-xl md:rounded-3xl font-black uppercase tracking-widest text-xs md:text-sm hover:scale-[1.02] transition-all">
-                            Enviar para Análise 
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="py-10 md:py-16 text-center border-t border-white/5">
-        <p class="text-[8px] md:text-[10px] text-gray-600 font-black uppercase tracking-[0.2em] mb-4">Developed by</p>
-        <div class="vantix-cta" onclick="openVantixModal()">
-            <div class="pulse-ring"></div>
-            <div class="cta-text">🔍 Clique para ver mais sobre a Vantix</div>
-            <img src="ei_1771694350645-removebg-preview.png" alt="Logo Vantix" class="h-20 md:h-28 mx-auto opacity-80 hover:opacity-100 transition-opacity cursor-pointer">
+            <p class="text-slate-400 text-sm font-light">&copy; 2026 Vantix Tech — Todos os direitos reservados</p>
+            <p class="text-slate-300 text-[11px] mt-1">Agradecemos sua paciência enquanto regularizamos os serviços.</p>
         </div>
     </footer>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Adicionando pequeno script para efeito de carregamento sutil (apenas visual) -->
     <script>
-        // Criar partículas de fundo (desabilitada porque já temos as partículas fixas)
-        function createParticles() {
-            // Não criar novas partículas pois já existem no HTML
-        }
-        
-        // Scroll animado
-        function checkVisibility() {
-            const elements = document.querySelectorAll('.animate-on-scroll, .animate-left, .animate-right, .animate-scale');
-            elements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                
-                if (rect.top < windowHeight * 0.85) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-
-        window.addEventListener('load', checkVisibility);
-        window.addEventListener('scroll', checkVisibility);
-        window.addEventListener('resize', checkVisibility);
-
-        AOS.init({ duration: 800, once: false, disable: true });
-
-        function scrollToQualify() {
-            document.getElementById('qualificar').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        function showForm() {
-            document.getElementById('btn-show-form').style.display = 'none';
-            document.getElementById('form-qualificar').style.display = 'block';
-            document.getElementById('form-qualificar').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        // Função para enviar para WhatsApp (Publicita)
-        function enviarWhatsApp() {
-            const nome = document.getElementById('nome').value.trim();
-            const whatsapp = document.getElementById('whatsapp').value.trim();
-            const loja = document.getElementById('loja').value.trim() || 'Não informado';
-            const faturamento = document.getElementById('faturamento').value.trim() || 'Não informado';
-
-            if (!nome || !whatsapp) {
-                alert('Por favor, preencha seu nome e WhatsApp!');
-                return;
-            }
-
-            const mensagem = `Saudações, Publicita. 👋\n\n` +
-                `Quero criativo para a minha loja/empresa e eis o meu formulário de qualificação:\n\n` +
-                `📋 *FORMULÁRIO DE QUALIFICAÇÃO*\n` +
-                `━━━━━━━━━━━━━━━━━━\n\n` +
-                `👤 *Nome:* ${nome}\n` +
-                `📱 *WhatsApp:* ${whatsapp}\n` +
-                `🛒 *Loja:* ${loja}\n` +
-                `💰 *Faturamento Mensal:* ${faturamento} MT\n\n` +
-                `━━━━━━━━━━━━━━━━━━\n` +
-                `Aguardando análise! 🚀`;
-
-            const numero = '258856428686'; // +258 85 642 8686
-            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-            
-            window.open(url, '_blank');
-        }
-
-        // Funções para o modal da Vantix
-        function openVantixModal() {
-            document.getElementById('vantixModal').classList.add('active');
-        }
-
-        function closeVantixModal() {
-            document.getElementById('vantixModal').classList.remove('active');
-        }
-
-        function openVantixWhatsApp() {
-            const mensagem = "Olá vantix! vim do site da publicita.";
-            const numero = '258870293855';
-            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-            window.open(url, '_blank');
-        }
-
-        // Fechar modal ao clicar fora
-        document.getElementById('vantixModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeVantixModal();
-            }
-        });
-
-        let clickCount = 0;
-        let lastTarget = null;
-
-        function handleSecretClick(element) {
-            if (lastTarget === element) clickCount++;
-            else { clickCount = 1; lastTarget = element; }
-
-            if (clickCount === 7) {
-                const input = document.getElementById('videoUpload');
-                input.onchange = (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const url = URL.createObjectURL(file);
-                        const video = element.querySelector('video');
-                        video.src = url;
-                        video.classList.remove('hidden');
-                        video.play();
-                        video.loop = true;
-                        element.querySelector('.video-overlay').style.display = 'none';
-                    }
-                };
-                input.click();
-                clickCount = 0;
-            }
-        }
-
-        // Card ativo no scroll
-        const scrollContainer = document.getElementById('scrollContainer');
-        const items = document.querySelectorAll('.scroll-item');
-
-        function updateActiveItem() {
-            if (!scrollContainer) return;
-            
-            const containerRect = scrollContainer.getBoundingClientRect();
-            const containerCenter = containerRect.left + containerRect.width / 2;
-
-            items.forEach(item => {
-                const itemRect = item.getBoundingClientRect();
-                const itemCenter = itemRect.left + itemRect.width / 2;
-                const distance = Math.abs(containerCenter - itemCenter);
-                const threshold = itemRect.width / 2;
-
-                if (distance < threshold) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-        }
-
-        if (scrollContainer) {
-            scrollContainer.addEventListener('scroll', updateActiveItem);
-            window.addEventListener('resize', updateActiveItem);
-            setTimeout(updateActiveItem, 100);
-        }
-
-        // Vídeos
-        document.addEventListener('DOMContentLoaded', function() {
-            const videos = document.querySelectorAll('video');
-            videos.forEach(video => {
-                video.play().catch(e => {
-                    console.log('Autoplay bloqueado');
+        (function() {
+            // Melhoria de experiência: se o usuário tentar recarregar várias vezes, apenas suavidade.
+            const btn = document.querySelector('.reload-btn');
+            if(btn) {
+                btn.addEventListener('click', (e) => {
+                    // feedback visual de clique sem travar
+                    const originalText = btn.innerHTML;
+                    btn.style.opacity = '0.8';
+                    setTimeout(() => {
+                        btn.style.opacity = '1';
+                    }, 150);
                 });
-            });
-        });
+            }
+        })();
     </script>
 </body>
-    </html>
+                    </html>
